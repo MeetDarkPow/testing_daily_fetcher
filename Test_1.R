@@ -14,8 +14,8 @@ token <- create_token(
   access_secret = acc_secret
 )
 
-rtweet_data <- search_tweets(q="#rstats", since = Sys.Date()-1, 
-                             until = Sys.Date(), 
+rtweet_data <- search_tweets(q="#rstats", since = Sys.Date()-2, 
+                             until = Sys.Date()-1, 
                              retryonratelimit = TRUE, include_rts = FALSE)
 
 rtweet_df <- data.frame(User_ID=rtweet_data$user_id, Status_ID=rtweet_data$status_id,
