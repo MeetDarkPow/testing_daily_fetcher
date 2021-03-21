@@ -1,10 +1,8 @@
-creds <- read.csv('twitter_creds.csv', fileEncoding = "UTF-8-BOM")
-
 # store API keys
-api_key <- as.character(creds$API_key)
-api_secret_key <- as.character(creds$API_secret)
-acc_token <- as.character(creds$Access_token)
-acc_secret <- as.character(creds$Access_token_secret)
+api_key <- "Vasln0HaAY8pkXu7J2xQkBX8c"
+api_secret_key <- "h5ra23jvrY8nq7vkUBld1mXXYwjsKR5iyNoH2CATUNKO1rdzq3"
+acc_token <- "1013338789580713984-2oRZj3Btzvgl0yZqJ8Wfr0GEmTzW34"
+acc_secret <- "92oQXpMxvdNI7gwIAji2ZfEdN905eGudFoeNWd4sb6Wnn"
 
 library(rtweet)
 
@@ -12,6 +10,8 @@ token <- create_token(
   app = "RtweetsExploration",
   consumer_key = api_key,
   consumer_secret = api_secret_key
+  access_token = acc_token,
+  access_secret = acc_secret
 )
 
 rtweet_data <- search_tweets(q="#rstats", since = Sys.Date()-1, 
