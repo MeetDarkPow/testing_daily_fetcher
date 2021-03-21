@@ -9,7 +9,7 @@ library(rtweet)
 token <- create_token(
   app = "RtweetsExploration",
   consumer_key = api_key,
-  consumer_secret = api_secret_key
+  consumer_secret = api_secret_key,
   access_token = acc_token,
   access_secret = acc_secret
 )
