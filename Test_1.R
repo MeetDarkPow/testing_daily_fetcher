@@ -14,6 +14,15 @@ token <- create_token(
   access_secret = acc_secret
 )
 
+if(!file.exists("data/rstats_Tweet.csv")){
+  empty_df <- data.frame(User_ID = character(), Status_ID = character(),
+                         Tweet_Date = character(), Tweet_Text = character(), 
+                         Retweet_Count = integer(), Likes = integer())
+  write_as_csv(empty_df, file_name = "data/rstats_Tweet")
+}
+
+read_df <- read_twitter_csv("data/rstats_Tweet.csv")
+
 # searching for required #rstats tweets
 rtweet_data <- search_tweets(q="#rstats", since = Sys.Date()-1, 
                              until = Sys.Date(), 
@@ -24,7 +33,8 @@ rtweet_df <- data.frame(User_ID=rtweet_data$user_id, Status_ID=rtweet_data$statu
                         Tweet_Date=rtweet_data$created_at, Tweet_Text=rtweet_data$text, 
                         Retweet_Count=rtweet_data$retweet_count, Likes = rtweet_data$favorite_count)
 
-# saving #rstats tweets to a csv file
-write.table(rtweet_df, file = "data/rstats_Tweet.csv", sep = ",",
-            row.names = FALSE, col.names = !file.exists("rstats_Tweet.csv"), 
-            append = TRUE)
+# combining new and old rstats tweet data frames
+new_rtweet_df <- rbind(read_df, rtweet_df)
+
+# saving rstats tweets to a csv file
+write_as_csv(new_rtweet_df, file_name = "data/rstats_Tweet")
